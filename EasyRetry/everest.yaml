@@ -1,0 +1,6 @@
+﻿- Name: EasyRetry
+  Version: 1.0.0
+  DLL: bin/Debug/EasyRetry.dll
+  Dependencies:
+    - Name: Everest
+      Version: 1.0.0
