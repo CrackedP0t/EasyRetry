@@ -49,14 +49,14 @@ namespace Celeste.Mod.EasyRetry
                         var player = self.Tracker.GetEntity<Player>();
                         if (player != null)
                         {
-                            if (player != null && !player.Dead && !self.InCutscene && !self.SkippingCutscene)
+                            if (player != null && !player.Dead && !self.InCutscene && !self.SkippingCutscene && player.CanRetry)
                             {
                                 Engine.TimeRate = 1f;
                                 Distort.GameRate = 1f;
                                 Distort.Anxiety = 0f;
 
                                 self.InCutscene = (self.SkippingCutscene = false);
-                                self.RetryPlayerCorpse = player.Die(Vector2.Zero, evenIfInvincible: true);
+                                player.Die(Vector2.Zero, evenIfInvincible: true);
                                 foreach (LevelEndingHook component in self.Tracker.GetComponents<LevelEndingHook>())
                                 {
                                     if (component.OnEnd != null)
@@ -68,8 +68,10 @@ namespace Celeste.Mod.EasyRetry
                         }
                     }
 
-                    orig(self);
                 }
+
+
+                orig(self);
             };
         }
 

@@ -5,7 +5,7 @@ using Monocle;
 
 namespace Celeste.Mod.EasyRetry
 {
-    [SettingName("modoptions_easyreset_title")]
+    [SettingName("modoptions_easyretry_title")]
     public class RetrySettings : EverestModuleSettings
     {
         public bool Enabled {get; set;} = true;
@@ -20,9 +20,9 @@ namespace Celeste.Mod.EasyRetry
             });
             menu.Add(setting);
         }
-        
+
         public Keys KeyboardBinding {get; set;} = Keys.K;
-        
+
         public void CreateKeyboardBindingEntry(TextMenu menu, bool inGame) {
             var setting = new TextMenu.Setting("Keyboard Binding", KeyboardBinding);
             setting.Pressed(() => {
