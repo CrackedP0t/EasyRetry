@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="everest.yaml" />
+    <None Include="README.md" />
+    <None Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
