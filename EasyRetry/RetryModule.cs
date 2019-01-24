@@ -44,7 +44,7 @@ namespace Celeste.Mod.EasyRetry
                         Button.Nodes.Add(new VirtualButton.PadButton(Input.Gamepad, Settings.ButtonBinding));
                         Button.Nodes.Add(new VirtualButton.KeyboardKey(Settings.KeyboardBinding));
                     }
-                    if (Button.Check)
+                    if (Button.Check && !self.Paused)
                     {
                         var player = self.Tracker.GetEntity<Player>();
                         if (player != null)
