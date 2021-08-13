@@ -49,7 +49,7 @@ namespace Celeste.Mod.EasyRetry
                         var player = self.Tracker.GetEntity<Player>();
                         if (player != null)
                         {
-                            if (player != null && !player.Dead && !self.InCutscene && !self.SkippingCutscene && player.CanRetry)
+                            if (player != null && !player.Dead && !self.Transitioning && !self.InCutscene && !self.SkippingCutscene && player.CanRetry)
                             {
                                 Engine.TimeRate = 1f;
                                 Distort.GameRate = 1f;
