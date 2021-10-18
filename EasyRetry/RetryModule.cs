@@ -46,26 +46,7 @@ namespace Celeste.Mod.EasyRetry
                     }
                     if (Button.Check && !self.Paused)
                     {
-                        var player = self.Tracker.GetEntity<Player>();
-                        if (player != null)
-                        {
-                            if (player != null && !player.Dead && !self.Transitioning && !self.InCutscene && !self.SkippingCutscene && player.CanRetry)
-                            {
-                                Engine.TimeRate = 1f;
-                                Distort.GameRate = 1f;
-                                Distort.Anxiety = 0f;
-
-                                self.InCutscene = (self.SkippingCutscene = false);
-                                player.Die(Vector2.Zero, evenIfInvincible: true);
-                                foreach (LevelEndingHook component in self.Tracker.GetComponents<LevelEndingHook>())
-                                {
-                                    if (component.OnEnd != null)
-                                    {
-                                        component.OnEnd();
-                                    }
-                                }
-                            }
-                        }
+                        Retry(self);
                     }
 
                 }
@@ -73,6 +54,30 @@ namespace Celeste.Mod.EasyRetry
 
                 orig(self);
             };
+        }
+
+        public static void Retry(Level self)
+        {
+            var player = self.Tracker.GetEntity<Player>();
+            if (player != null)
+            {
+                if (!player.Dead && !self.Transitioning && !self.InCutscene && !self.SkippingCutscene && player.CanRetry)
+                {
+                    Engine.TimeRate = 1f;
+                    Distort.GameRate = 1f;
+                    Distort.Anxiety = 0f;
+
+                    self.InCutscene = (self.SkippingCutscene = false);
+                    player.Die(Vector2.Zero, evenIfInvincible: true);
+                    foreach (LevelEndingHook component in self.Tracker.GetComponents<LevelEndingHook>())
+                    {
+                        if (component.OnEnd != null)
+                        {
+                            component.OnEnd();
+                        }
+                    }
+                }
+            }
         }
 
         // Optional, initialize anything after Celeste has initialized itself properly.
